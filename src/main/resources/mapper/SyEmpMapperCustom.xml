@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxc.mapper.SyEmpMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.lxc.entity.SyEmp" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="empName" property="empname" jdbcType="VARCHAR" />
+    <result column="empNo" property="empno" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="deptID" property="deptid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="disabled" property="disabled" jdbcType="INTEGER" />
+  </resultMap>
+
+
+  <select id="login" resultMap="BaseResultMap" parameterType="com.lxc.entity.SyEmp">
+    select * from  sy_emp where empno =#{empno} and pwd =#{pwd}
+  </select>
+
+</mapper>

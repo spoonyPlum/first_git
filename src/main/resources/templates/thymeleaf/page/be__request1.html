@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html  xmlns:th="http://www.thymeleaf.org">
+ 
+<head> 
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+	<title>湖南省自来水公司营销管理信息系统</title> 
+	
+	<link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/text.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/form.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/buttons.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/grid.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" title="no title" />
+	
+	<link rel="stylesheet" href="/static/css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/facebox.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/dataTables.css" type="text/css" media="screen" title="no title" />
+	
+	<link rel="stylesheet" href="/static/css/custom.css" type="text/css" media="screen" title="no title">
+<style type="text/css">
+#t_meterCount { text-align:right; width:30px; vertical-align:middle; }
+</style>
+<script type="text/javascript">
+function setMeter(){
+	var n = $('#t_meterCount').val();
+	if(isNaN(n))return;    //不是数字
+	if(n<=0||n>100)return; //不合理
+	var rows = $('table.data tbody tr');
+	if(rows.length == n)return; //行数相同
+	
+	if(rows.length<n){//需增加行数
+		for(var i=rows.length;i<n;i++){
+			$('table.data tbody').append('<tr><td>' + (i+1) +
+				'</td><td><input name="bouName"/></td><td><input name="bouhPone"/></td><td><input name="bouSmsPhone"/></td><td><input name="bouAddress"/></td><td></td></tr>');
+		}
+		
+	}else{//需减少行数
+		$('table.data tbody tr:gt('+(n-1)+')').remove();
+	}
+}
+</script>
+</head> 
+ 
+<body> 
+
+<div id="wrapper">
+	<div id="header">
+		<div class="content_pad">
+			<h1><a href="./workspace.html" th:href="@{/menu/selectAll}">湖南省自来水公司营销管理信息系统</a></h1>
+			<ul id="nav">
+				<li class="nav_dropdown nav_icon" th:each="menu:${session.MenuList}">
+					<a href="javascript:;">
+						<span class="ui-icon ui-icon-wrench" th:class="${menu[0].icon}"></span><font th:text="${menu[0].menuname}"></font></a>
+					<div class="nav_menu">
+						<ul>
+							<li th:each="child,iterStat:${menu}">
+								<a th:if="${iterStat.index > 0}" href="#" th:href="${child.url}" th:text="${child.menuname}">01 用户申请</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<li class="nav_current nav_dropdown nav_icon_only">
+					<a href="javascript:;">&nbsp;</a>
+
+					<div class="nav_menu">
+						<ul>
+							<li><a href="../workspace.html">我的工作台</a></li>
+							<li><a href="../page/sys_pwd.html">修改密码</a></li>
+							<li><a href="../login.html">退出系统</a></li>
+						</ul>
+					</div> <!-- .menu -->
+				</li>
+			</ul>
+		</div> <!-- .content_pad -->
+	</div> <!-- #header -->
+
+	<div id="masthead">
+		<div>
+			<span id="pagetitle"><a href="javascript:;">我的工作台</a></span>
+			<span id="welcome_span" th:text="${session.emp}!= null ? ${session.emp.empname} " >欢迎回来,马云</span>
+		</div>
+	</div> <!-- #masthead -->
+
+	<div id="content" class="xgrid">
+		
+ 		
+		<div class="x12">
+			
+			<h2>
+				用户申请 - 办理新开户业务
+				<a style="float:right" href="javascript:history.back(-1);">返回</a>
+			</h2>
+			<form id="fm" th:action="@{/beOrder/insert}" th:method="post">
+				<div class="tab_container">
+					<ul class="tabs">
+						<li><a href="#tab1">申请表</a></li>
+						<li><a href="#tab2">新户详细表</a></li>
+					</ul>
+					<div class="tab_content_container">
+						<div id="tab1" class="tab_content">
+							<table width="100%">
+								<thead>
+									<tr>
+										<th width="60"></th>
+										<th width="220"></th>
+										<th width="60"></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>用户名称</td>
+										<td><input th:name="order.username"/></td>
+										<td>用户类型</td>
+										<td><select style="width:158px;" th:name="order.usertype">
+												<option>公户</option>
+												<option selected="selected">私户</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>联系人</td>
+										<td><input th:name="order.linkman"/></td>
+										<td>联系电话</td>
+										<td><input th:name="order.phone"/></td>
+									</tr>
+									<tr>
+										<td>用户地址</td>
+										<td colspan="3"><input size="68" th:name="order.address"/></td>
+									</tr>
+									<tr>
+										<td>用水量</td>
+										<td><input th:name="order.maxamount"/></td>
+										<td>申请表径</td>
+										<td><select style="width:158px;" th:name="order.metertypeid">
+												<option value="1" selected="selected">DN10</option>
+												<option>DN15</option>
+												<option>DN20</option>
+												<option>DN40</option>
+												<option>DN80</option>
+												<option>DN100</option>
+												<option>DN200</option>
+												<option>DN500</option>
+												<option>DN1000</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>房屋层次</td>
+										<td><input th:name="order.househeight"/></td>
+										<td>接水用途</td>
+										<td><input th:name="order.usetarget"/></td>
+									</tr>
+									<tr>
+										<td>备注说明</td>
+										<td colspan="3"><input size="68" th:name="order.userremark"/></td>
+									</tr>
+								</tbody>
+								</table>
+						</div>
+						<div id="tab2" class="tab_content">
+							申请装表表数 <input id="t_meterCount" value="1" th:name="order.metercount"/>
+							<button type="button" class="btn btn-small" onClick="setMeter();">确定</button>
+
+							<div id="meters">
+								<table class="data display">
+								<thead>
+									<tr>
+										<th width="30">序号</th>
+										<th width="160">姓名</th>
+										<th width="160">电话</th>
+										<th width="160">短信号码</th>
+										<th width="160">地址</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td><input th:name="bouName"/></td>
+										<td><input th:name="bouhPone"/></td>
+										<td><input th:name="bouSmsPhone"/></td>
+										<td><input th:name="bouAddress"/></td>
+										<td></td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+	
+			
+		</div> <!-- .x12 -->
+		
+		<div class="centerButtons">
+			<button class="btn" form="fm">办理</button>
+			<button class="btn btn-grey" onClick="history.back(-1);">返回</button>
+		</div>
+		
+	</div> <!-- #content -->
+	
+	<div id="footer">		
+		<div class="content_pad">			
+			<p>&copy; 2013-11 版权所有 <a href="#">湖南省自来水公司</a>.   技术支持 <a href="#">华瑞教育</a>.</p>
+		</div> <!-- .content_pad -->
+	</div> <!-- #footer -->
+	
+</div> <!-- #wrapper -->
+
+<script src="/static/js/jquery/jquery-1.5.2.min.js"></script>
+<script src="/static/js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
+<script src="/static/js/misc/excanvas.min.js"></script>
+<script src="/static/js/jquery/facebox.js"></script>
+<script src="/static/js/jquery/jquery.visualize.js"></script>
+<script src="/static/js/jquery/jquery.dataTables.min.js"></script>
+<script src="/static/js/jquery/jquery.tablesorter.min.js"></script>
+<script src="/static/js/jquery/jquery.uniform.min.js"></script>
+<script src="/static/js/jquery/jquery.placeholder.min.js"></script>
+
+<script src="/static/js/widgets.js"></script>
+<script src="/static/js/dashboard.js"></script>
+
+<script type="text/javascript">
+	
+$(document).ready ( function () 
+{
+	Dashboard.init ();	
+	
+	//选项卡初始化
+	$('.tab_container').tabs ();	
+});
+
+</script>
+
+</body> 
+ 
+</html>

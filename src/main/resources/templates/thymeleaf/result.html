@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="/static/js/jquery/jquery-1.7.2.js"></script>
+    <style type="text/css" >
+
+        /*灰色遮罩层*/
+
+        .fade{
+
+            width:100%;
+
+            height:100%;
+
+            background:rgba(0, 0, 0, 0.5);
+
+            position: fixed;
+
+            left: 0;
+
+            top: 0;
+
+            z-index: 99;
+
+        }
+
+        /*弹出层*/
+
+        .succ-pop{
+
+            width: 400px;
+
+            height: 300px;
+
+            background: #fff;
+
+            position: fixed;
+
+            left: 50%;
+
+            top: 50%;
+
+            margin-left: -200px;
+
+            margin-top: -150px;
+
+            z-index: 999;
+
+            border-radius: 5px;
+
+        }
+
+        h3.title{
+
+            text-align: center;
+
+            font-size: 22px;
+
+            color: #ce002c;
+
+        }
+
+
+
+    </style>
+
+    <script th:inline="javascript">
+
+        window.onload = function(){
+            setTimeout(function(){
+                var path = [[${path}]];
+                window.location.href="/redirect?path="+path;
+            }, 3000);
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div align="center">
+        <h3 class="title" th:text="${msg}">
+            操作成功
+        </h3>
+        <h4>正在进行跳转，~~~~~~~~~~~~~~</h4>
+    </div>
+</body>
+
+</html>

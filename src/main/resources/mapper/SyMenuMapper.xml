@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxc.mapper.SyMenuMapper">
+  <resultMap id="BaseResultMap" type="com.lxc.entity.SyMenu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menuName" jdbcType="VARCHAR" property="menuname" />
+    <result column="parent" jdbcType="INTEGER" property="parent" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="onClick" jdbcType="VARCHAR" property="onclick" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="orderIndex" jdbcType="INTEGER" property="orderindex" />
+    <result column="flowID" jdbcType="INTEGER" property="flowid" />
+    <result column="disabled" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+</mapper>

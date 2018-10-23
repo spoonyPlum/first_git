@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxc.mapper.BeOrderuserMapper" >
+  <resultMap id="BaseResultMap" type="com.lxc.entity.BeOrderuser" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="orderNo" property="orderno" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="sMSPhone" property="smsphone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="projectMoney" property="projectmoney" jdbcType="DOUBLE" />
+    <result column="realMoney" property="realmoney" jdbcType="DOUBLE" />
+    <result column="invoiceNo" property="invoiceno" jdbcType="VARCHAR" />
+    <result column="formula" property="formula" jdbcType="VARCHAR" />
+    <result column="contractNum" property="contractnum" jdbcType="VARCHAR" />
+    <result column="meterTypeID" property="metertypeid" jdbcType="INTEGER" />
+    <result column="meterName" property="metername" jdbcType="VARCHAR" />
+    <result column="maxValue" property="maxvalue" jdbcType="INTEGER" />
+    <result column="startValue" property="startvalue" jdbcType="INTEGER" />
+    <result column="meterFactory" property="meterfactory" jdbcType="VARCHAR" />
+    <result column="docNum" property="docnum" jdbcType="VARCHAR" />
+    <result column="userNo" property="userno" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+ 
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head> 
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+	<title>湖南省自来水公司营销管理信息系统 - 员工登陆</title> 
+
+	<link rel="stylesheet" href="./css/reset.css" th:href="@{/static/css/reset.css}" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="./css/text.css" th:href="@{/static/css/text.css}" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="./css/form.css" th:href="@{/static/css/form.css}" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="./css/buttons.css" th:href="@{/static/css/buttons.css}" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="./css/login.css" th:href="@{/static/css/login.css}" type="text/css" media="screen" title="no title" />
+	<script th:src="@{/static/js/jquery/jquery-1.7.2.js}"></script>
+</head>
+<body>
+<div id="login_background">
+<div id="login">
+	<h1>员工登陆</h1>
+	<div id="login_panel">
+		<form th:method="post" method="post" accept-charset="utf-8" th:action="@{/login}">
+		<div class="login_fields">
+				<div class="field">
+					<label for="empno">员工工号：</label>
+					<input type="text"  th:name="empno"  id="empno" tabindex="1" placeholder="请输入您的员工编号" />
+				</div>
+				
+				<div class="field">
+					<label for="pwd">登陆密码： </label>
+					<input type="password" th:name="pwd" value="" id="pwd" tabindex="2" placeholder="请输入您的密码" />
+				</div>
+			</div> <!-- .login_fields -->
+			
+			<div class="login_actions">
+				<button type="submit" class="btn btn-orange" tabindex="3" onclick="formsub()">登陆</button>
+			</div>
+		</form>
+	</div> <!-- #login_panel -->		
+</div> 
+<!-- #login -->
+</div>
+</body> 
+ 
+</html>

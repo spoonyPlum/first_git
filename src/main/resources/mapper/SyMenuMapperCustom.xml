@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxc.mapper.SyMenuMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.lxc.entity.SyMenu" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+  <result column="menuName" property="menuname" jdbcType="VARCHAR" />
+  <result column="parent" property="parent" jdbcType="INTEGER" />
+  <result column="url" property="url" jdbcType="VARCHAR" />
+  <result column="onClick" property="onclick" jdbcType="VARCHAR" />
+  <result column="icon" property="icon" jdbcType="VARCHAR" />
+  <result column="orderIndex" property="orderindex" jdbcType="INTEGER" />
+  <result column="flowID" property="flowid" jdbcType="INTEGER" />
+  <result column="disabled" property="disabled" jdbcType="INTEGER" />
+</resultMap>
+
+  <select id="selectAllByEmpId" resultMap="BaseResultMap" parameterType="int">
+    select m.* from sy_menu m left join sy_empmenupower p
+     on m.id = p.menuID left join sy_emp e
+      on p.empID = e.id where e.id=#{id}
+  </select>
+
+</mapper>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head> 
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+	<title>湖南省自来水公司营销管理信息系统</title>
+
+	<link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/text.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/form.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/buttons.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/grid.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" title="no title" />
+
+	<link rel="stylesheet" href="/static/css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/facebox.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />
+	<link rel="stylesheet" href="/static/css/plugin/dataTables.css" type="text/css" media="screen" title="no title" />
+
+	<link rel="stylesheet" href="/static/css/custom.css" type="text/css" media="screen" title="no title">
+
+
+</head>
+ 
+<body> 
+
+<div id="wrapper">	
+	
+	<div id="header">
+		
+		<div class="content_pad">
+			<h1><a href="../workspace.html">湖南省自来水公司营销管理信息系统</a></h1>
+
+			<ul id="nav">
+				<li class="nav_dropdown nav_icon" th:each="menu:${session.MenuList}">
+					<a href="javascript:;">
+						<span class="ui-icon ui-icon-wrench" th:class="${menu[0].icon}"></span><font th:text="${menu[0].menuname}"></font></a>
+					<div class="nav_menu">
+						<ul>
+							<li th:each="child,iterStat:${menu}">
+								<a th:if="${iterStat.index > 0}" href="#" th:href="${child.url}" th:text="${child.menuname}">01 用户申请</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<li class="nav_current nav_dropdown nav_icon_only">
+					<a href="javascript:;">&nbsp;</a>
+
+					<div class="nav_menu">
+						<ul>
+							<li><a href="../workspace.html">我的工作台</a></li>
+							<li><a href="../page/sys_pwd.html">修改密码</a></li>
+							<li><a href="../login.html">退出系统</a></li>
+						</ul>
+					</div> <!-- .menu -->
+				</li>
+			</ul>
+		</div> <!-- .content_pad -->
+	</div> <!-- #header -->
+
+	<div id="masthead">
+		<div>
+			<span id="pagetitle"><a href="javascript:;">初步审核</a></span>
+			<span id="welcome_span" th:text="${session.emp.empname}" >欢迎回来,马云</span>
+		</div>
+	</div> <!-- #masthead -->
+	
+	<div id="content" class="xgrid">
+		
+ 		
+		<div class="x12">
+			
+			<h2>正在等待【初步审核】的工单</h2>
+			
+			<table class="data display">
+					<thead>
+						<tr>
+							<th width="120">工单号</th>
+							<th width="60">类型</th>
+							<th width="80">进度</th>
+							<th width="90">当前处理部门</th>
+							<th width="100">最后操作日期</th>
+							<th width="200">用户名称</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:class="${iterStat.odd}?'odd':'even'" class="odd" th:each="order,iterStat:${list}">
+							<td>
+								<a href="../page/be_orderInfo.html?id=B1-20140105-0001" target="orderInfo" th:text="${order.orderno}">B1-20140105-0001</a>
+							</td>
+							<td th:if="${order.ordertype}==1">新户</td>
+							<td th:if="${order.ordertype}==2">分户</td>
+							<td th:if="${order.ordertype}==3">过户</td>
+							<td th:if="${order.ordertype}==4">代扣</td>
+							<td th:if="${order.ordertype}==5">换表</td>
+							<td th:if="${order.ordertype}==6">重签</td>
+							<td th:if="${order.ordertype}==7">销户</td>
+							<td>初步审核</td>
+							<td>生技室</td>
+							<td th:text="${#dates.format(order.createdate,'yyyy-MM-dd')}">2014-02-18</td>
+							<td th:text="${order.username}">许三多</td>
+							<td><button class="btn-icon btn-small btn-blue btn-check"  th:onclick="'javascript:goTo(\''+${order.orderno}+':'+${order.username}+'\')'"><span></span>处理</button></td>
+						</tr>
+
+					</tbody>
+				</table>
+				<div class="page">
+					<a href="#" th:href="@{/beOrder/selectAllByStepId(stepId=2,path='/page/be__audit',page=1,count=${Total})}">第一页</a>
+					<a href="#" th:href="@{/beOrder/selectAllByStepId(stepId=2,path='/page/be__audit',page=${page}-1,count=${Total})}">上一页</a>
+					<input class="pageIndex" th:value="${page}"/> / <input class="pageCount" readonly="readonly" value="98765" th:value="${Total}"/>
+					<a href="#" th:href="@{/beOrder/selectAllByStepId(stepId=2,path='/page/be__audit',page=${page}+1,count=${Total})}">下一页</a>
+					<a href="#" th:href="@{/beOrder/selectAllByStepId(stepId=2,path='/page/be__audit',page=${Total},count=${Total})}">第未页</a>
+				</div>
+			
+		</div> <!-- .x12 -->
+		
+	</div> <!-- #content -->
+	
+	<div id="footer">		
+		<div class="content_pad">			
+			<p>&copy; 2013-11 版权所有 <a href="#">湖南省自来水公司</a>.   技术支持 <a href="#">华瑞教育</a>.</p>
+		</div> <!-- .content_pad -->
+	</div> <!-- #footer -->
+	
+</div> <!-- #wrapper -->
+
+<script src="/static/js/jquery/jquery-1.5.2.min.js"></script>
+<script src="/static/js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
+<script src="/static/js/misc/excanvas.min.js"></script>
+<script src="/static/js/jquery/facebox.js"></script>
+<script src="/static/js/jquery/jquery.visualize.js"></script>
+<script src="/static/js/jquery/jquery.dataTables.min.js"></script>
+<script src="/static/js/jquery/jquery.tablesorter.min.js"></script>
+<script src="/static/js/jquery/jquery.uniform.min.js"></script>
+<script src="/static/js/jquery/jquery.placeholder.min.js"></script>
+
+<script src="/static/js/widgets.js"></script>
+<script src="/static/js/dashboard.js"></script>
+
+<script type="text/javascript">
+	
+$(document).ready ( function () 
+{
+	Dashboard.init ();		
+});
+
+</script>
+
+<script type="text/javascript">
+	function goTo(url){
+		var order = url.split(":");
+		sessionStorage.setItem("orderno",order[0]);
+		sessionStorage.setItem("username",order[1]);
+		location.href="/redirect?path=/page/be__auditForm.html";
+	}
+</script>
+
+
+</body> 
+ 
+</html>

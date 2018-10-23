@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxc.mapper.BeOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.lxc.entity.BeOrder" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="orderNo" property="orderno" jdbcType="VARCHAR" />
+    <result column="orderType" property="ordertype" jdbcType="INTEGER" />
+    <result column="stepID" property="stepid" jdbcType="INTEGER" />
+    <result column="createEmp" property="createemp" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="completeEmp" property="completeemp" jdbcType="INTEGER" />
+    <result column="completeDate" property="completedate" jdbcType="TIMESTAMP" />
+    <result column="lastEditEmp" property="lasteditemp" jdbcType="INTEGER" />
+    <result column="lastEditDate" property="lasteditdate" jdbcType="TIMESTAMP" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userType" property="usertype" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="linkMan" property="linkman" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="useTarget" property="usetarget" jdbcType="VARCHAR" />
+    <result column="houseHeight" property="househeight" jdbcType="INTEGER" />
+    <result column="maxAmount" property="maxamount" jdbcType="INTEGER" />
+    <result column="meterTypeID" property="metertypeid" jdbcType="INTEGER" />
+    <result column="meterCount" property="metercount" jdbcType="INTEGER" />
+    <result column="userRemark" property="userremark" jdbcType="VARCHAR" />
+    <result column="payType" property="paytype" jdbcType="VARCHAR" />
+    <result column="bankCompany" property="bankcompany" jdbcType="VARCHAR" />
+    <result column="bankNum" property="banknum" jdbcType="VARCHAR" />
+    <result column="oldUserNo" property="olduserno" jdbcType="VARCHAR" />
+    <result column="oldUserName" property="oldusername" jdbcType="VARCHAR" />
+    <result column="oldUserPhone" property="olduserphone" jdbcType="VARCHAR" />
+    <result column="oldUserAddr" property="olduseraddr" jdbcType="VARCHAR" />
+    <result column="oldMeter" property="oldmeter" jdbcType="VARCHAR" />
+    <result column="auditEmpID" property="auditempid" jdbcType="INTEGER" />
+    <result column="auditMessage" property="auditmessage" jdbcType="VARCHAR" />
+    <result column="projectMoney" property="projectmoney" jdbcType="DOUBLE" />
+    <result column="realMoney" property="realmoney" jdbcType="DOUBLE" />
+    <result column="payDate" property="paydate" jdbcType="TIMESTAMP" />
+    <result column="projectDate1" property="projectdate1" jdbcType="TIMESTAMP" />
+    <result column="projectDate2" property="projectdate2" jdbcType="TIMESTAMP" />
+    <result column="areaID" property="areaid" jdbcType="INTEGER" />
+    <result column="abortCause" property="abortcause" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>
